@@ -1,10 +1,8 @@
-import React from 'react'
+import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native'
 
 const DocumentScreen = () => {
   return (
-    <div>
-      
-    </div>
+    <Text>poop</Text>
   )
 }
 
