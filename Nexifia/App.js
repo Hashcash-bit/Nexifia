@@ -6,12 +6,16 @@ import { View } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import Tabs from "./navigation/tabs"
 
+//Landing page
+import Landingpage from './ExternalScreens/Landingpage'
+
 
 const App = () => {
   return (
-      <NavigationContainer>
-        <Tabs />
-      </NavigationContainer>    
+      // <NavigationContainer>
+      //   <Tabs />
+      // </NavigationContainer>
+      <Landingpage />    
   )
 }
 

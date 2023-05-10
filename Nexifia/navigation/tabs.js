@@ -3,11 +3,11 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native'
 
 // Screens
-import HomeScreen from '../screens/HomeScreen';
-import SearchScreen from '../screens/SearchScreen';
-import DocumentScreen from '../screens/DocumentScreen';
-import HistoryScreen from '../screens/HistoryScreen';
-import ProfileScreen from '../screens/ProfileScreen';
+import HomeScreen from '../InternalScreens/HomeScreen';
+import SearchScreen from '../InternalScreens/SearchScreen';
+import DocumentScreen from '../InternalScreens/DocumentScreen';
+import HistoryScreen from '../InternalScreens/HistoryScreen';
+import ProfileScreen from '../InternalScreens/ProfileScreen';
 
 const Tab = createBottomTabNavigator();
 
