@@ -1,11 +1,25 @@
-import React from 'react'
-import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native'
-
+// Import React Dependencies
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  ViewBase,
+} from "react-native";
 
 const SearchScreen = () => {
   return (
-    <Text>poop</Text>
-  )
-}
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: "#131417",
+        fontColor: "white",
+      }}
+    >
+      <Text>Poop</Text>
+    </View>
+  );
+};
 
-export default SearchScreen
+export default SearchScreen;

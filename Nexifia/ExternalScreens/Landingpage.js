@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-const Landingpage = () => {
+const Landingpage = ({navigation}) => {
   return (
     <View
       style={{
@@ -65,23 +65,21 @@ const Landingpage = () => {
           marginBottom: 43,
         }}
       />
-      <TouchableOpacity
-      onPress={}>
-
+      <TouchableOpacity onPress={()=>navigation.navigation('LogIn')}>
+        <View
+          style={{
+            width: 60,
+            height: 60,
+            borderRadius: 30,
+            backgroundColor: "#582FFF",
+            justifyContent: "center",
+            alignItems: "center",
+            bottom: 30,
+          }}
+        >
+          <Image source={require("../assets/arrow.png")} />
+        </View>
       </TouchableOpacity>
-      <View
-        style={{
-          width: 60,
-          height: 60,
-          borderRadius: 30,
-          backgroundColor: "#582FFF",
-          justifyContent: "center",
-          alignItems: "center",
-          bottom: 30,
-        }}
-      >
-        <Image source={require("../assets/arrow.png")} />
-      </View>
     </View>
   );
 };
@@ -97,7 +95,6 @@ const styles = StyleSheet.create({
   },
   title: {
     height: 100,
-    // backgroundColor: 'yellow',
     alignItems: "center",
     justifyContent: "center",
   },
