@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-const Landingpage = ({navigation}) => {
+const Landingpage = ({ navigation }) => {
   return (
     <View
       style={{
@@ -65,7 +65,7 @@ const Landingpage = ({navigation}) => {
           marginBottom: 43,
         }}
       />
-      <TouchableOpacity onPress={()=>navigation.navigation('LogIn')}>
+      <TouchableOpacity onPress={() => navigation.navigate("LogIn")}>
         <View
           style={{
             width: 60,

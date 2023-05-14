@@ -9,6 +9,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 //External Pages
 import Landingpage from "./ExternalScreens/Landingpage";
+import Loginpage from "./ExternalScreens/Loginpage";
 
 //Internal Pages
 import HomeScreen from "./InternalScreens/HomeScreen";
@@ -25,7 +26,7 @@ const App = () => {
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         {/* App Stack */}
         <Stack.Screen name="OnBoarding" component={Landingpage} />
-        <Stack.Screen name="LogIn" component={Landingpage} />
+        <Stack.Screen name="LogIn" component={Loginpage} />
         <Stack.Screen name="DashBoard" component={Tabs} />
       </Stack.Navigator>
     </NavigationContainer>
