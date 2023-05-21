@@ -56,7 +56,7 @@ const Loginpage = ({ navigation }) => {
             justifyContent: "space-between",
             display: "flex",
             flexDirection: "column",
-            marginTop: 22,
+            marginTop: 100,
           }}
         >
           <TextInput
@@ -89,30 +89,27 @@ const Loginpage = ({ navigation }) => {
         </View>
         <TouchableOpacity
           onPress={() => navigation.navigate("OnBoarding")}
-          style={{ alignContent: "center", justifyContent: "center" }}
+          style={{
+            padding: 20,
+            backgroundColor: "#6C63FF",
+            borderRadius: 15,
+            width: 150,
+            alignContent: "center",
+            justifyContent: "center",
+            marginTop: 20,
+          }}
         >
-          <View
+          <Text
             style={{
-              padding: 20,
-              backgroundColor: "blue",
-              borderRadius: 15,
-              width: 100,
+              color: "white",
+              fontWeight: "bold",
               alignContent: "center",
               justifyContent: "center",
+              alignSelf: "center",
             }}
           >
-            <Text
-              style={{
-                color: "white",
-                fontWeight: "bold",
-                alignContent: "center",
-                justifyContent: "center",
-                alignSelf: "center",
-              }}
-            >
-              ENTER
-            </Text>
-          </View>
+            ENTER
+          </Text>
         </TouchableOpacity>
       </ImageBackground>
       <View>
@@ -121,7 +118,7 @@ const Loginpage = ({ navigation }) => {
           style={{
             width: 180,
             height: 43,
-            // bottom: 43,
+            marginTop: 20,
           }}
         />
       </View>
@@ -134,10 +131,7 @@ const Loginpage = ({ navigation }) => {
             backgroundColor: "#582FFF",
             justifyContent: "center",
             alignItems: "center",
-            // bottom: 0,
-            // top: -35,
-            // left: -30,
-            // position: "absolute",
+            marginTop: 10,
           }}
         >
           <Image source={require("../assets/arrow.png")} />
