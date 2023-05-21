@@ -152,7 +152,7 @@ export const Signuppage = ({ navigation }) => {
           }}
         />
       </View>
-      <TouchableOpacity onPress={() => navigation.navigate("OnBoarding")}>
+      <TouchableOpacity onPress={() => navigation.navigate("LogIn")}>
         <View
           style={{
             width: 60,
