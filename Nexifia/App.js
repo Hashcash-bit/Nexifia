@@ -10,6 +10,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 //External Pages
 import Landingpage from "./ExternalScreens/Landingpage";
 import Loginpage from "./ExternalScreens/Loginpage";
+import { Signuppage } from "./ExternalScreens/Signuppage";
 
 //Internal Pages
 import HomeScreen from "./InternalScreens/HomeScreen";
@@ -27,6 +28,8 @@ const App = () => {
         {/* App Stack */}
         <Stack.Screen name="OnBoarding" component={Landingpage} />
         <Stack.Screen name="LogIn" component={Loginpage} />
+        <Stack.Screen name="SignUp" component={Signuppage} />
+
         <Stack.Screen name="DashBoard" component={Tabs} />
       </Stack.Navigator>
     </NavigationContainer>

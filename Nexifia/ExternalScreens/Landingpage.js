@@ -24,7 +24,6 @@ const Landingpage = ({ navigation }) => {
       <View
         style={{
           height: 100,
-          // backgroundColor: 'yellow',
           alignItems: "center",
           justifyContent: "center",
         }}
