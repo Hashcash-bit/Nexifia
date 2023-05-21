@@ -66,7 +66,7 @@ const Loginpage = ({ navigation }) => {
               marginBottom: 13,
               backgroundColor: "#131417",
               padding: 10,
-              borderWidth: 1,
+              borderWidth: 0.5,
               borderColor: "white",
               color: "white",
               fontWeight: "bold",
@@ -79,7 +79,7 @@ const Loginpage = ({ navigation }) => {
             style={{
               backgroundColor: "#131417",
               padding: 10,
-              borderWidth: 1,
+              borderWidth: 0.5,
               borderColor: "white",
               color: "white",
               fontWeight: "bold",
@@ -88,9 +88,11 @@ const Loginpage = ({ navigation }) => {
           />
         </View>
         <TouchableOpacity
-          onPress={() => navigation.navigate("OnBoarding")}
+          onPress={() => navigation.navigate("Dashboard")}
           style={{
-            padding: 20,
+            // padding: 20,
+            paddingBottom: 12,
+            paddingTop: 12,
             backgroundColor: "#6C63FF",
             borderRadius: 15,
             width: 150,
@@ -118,11 +120,11 @@ const Loginpage = ({ navigation }) => {
           style={{
             width: 180,
             height: 43,
-            marginTop: 20,
+            marginTop: 10,
           }}
         />
       </View>
-      <TouchableOpacity onPress={() => navigation.navigate("OnBoarding")}>
+      <TouchableOpacity onPress={() => navigation.navigate("SignUp")}>
         <View
           style={{
             width: 60,
@@ -142,103 +144,3 @@ const Loginpage = ({ navigation }) => {
 };
 
 export default Loginpage;
-// //Important React dependencies
-// import React from "react";
-// import { Text, Image, View, TouchableOpacity, TextInput, ImageBackground } from "react-native";
-
-// //Database Dependencies
-
-// const Loginpage = ({ navigation }) => {
-//   return (
-//     <View
-//       style={{
-//         flex: 1,
-//         display: "flex",
-//         flexDirection: "column",
-//         backgroundColor: "#131417",
-//         alignContent: "center",
-//         alignItems: "center",
-//       }}
-//     >
-//       <View
-//         style={{
-//           height: 100,
-//           alignItems: "center",
-//           justifyContent: "center",
-//         }}
-//       >
-//         <Image
-//           source={require("../assets/NEXIFIA.png")}
-//           style={{
-//             width: 217,
-//             height: 40,
-//             marginTop: 50,
-//           }}
-//         />
-//       </View>
-//       <View
-//         style={{
-//           flex: 1,
-//           justifyContent: "center",
-//           alignItems: "center",
-//           zIndex: -10,
-//         }}
-//       >
-//         <ImageBackground
-//           source={require("../assets/phonelogin.png")}
-//           style={{
-//             width: 258, //it was 259
-//             height: 530, // it was 530
-//             justifyContent: "flex-end",
-//             alignItems: "center",
-//             zIndex: -10,
-//             marginBottom: 23,
-//           }}
-//         />
-//       </View>
-//       <View>
-//         <Image
-//           source={require("../assets/hna.png")}
-//           style={{
-//             width: 180,
-//             height: 43,
-//             bottom: 43,
-//           }}
-//         />
-//       </View>
-//       <TouchableOpacity onPress={() => navigation.navigate("SignUp")}>
-//         <View
-//           style={{
-//             width: 60,
-//             height: 60,
-//             borderRadius: 30,
-//             backgroundColor: "#582FFF",
-//             justifyContent: "center",
-//             alignItems: "center",
-//             bottom: 0,
-//             top: -35,
-//             left: -30,
-//             position: "absolute",
-//           }}
-//         >
-//           <Image source={require("../assets/arrow.png")} />
-//         </View>
-//       </TouchableOpacity>
-//       {/* I want this to be the two login form input fields */}
-//       <View
-//         style={{
-//           zIndex: 9,
-//           backgroundColor: "yellow",
-//           width: 326,
-//           bottom: 400,
-//           justifyContent: "space-between",
-//         }}
-//       >
-//         <TextInput placeholder="Email Address"></TextInput>
-//         <TextInput placeholder="Password"></TextInput>
-//       </View>
-//     </View>
-//   );
-// };
-
-// export default Loginpage;
