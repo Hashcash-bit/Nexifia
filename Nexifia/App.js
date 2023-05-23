@@ -29,9 +29,8 @@ const App = () => {
         <Stack.Screen name="OnBoarding" component={Landingpage} />
         <Stack.Screen name="LogIn" component={Loginpage} />
         <Stack.Screen name="SignUp" component={Signuppage} />
-        {/* <Stack.Screen name="Dashboard" component={HomeScreen} /> */}
-
-        <Stack.Screen name="DashBoard" component={Tabs} />
+        {/* This will be the protected route */}
+        <Stack.Screen name="InternalStack" component={Tabs} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -9,7 +9,6 @@ import {
 } from "react-native";
 
 //Import the navigation bar
-// import Tabs from "../navigation/tabs";
 
 const HomeScreen = () => {
   return (
@@ -21,7 +20,6 @@ const HomeScreen = () => {
       }}
     >
       <Text>poop</Text>
-      {/* <Tabs /> */}
     </View>
   );
 };

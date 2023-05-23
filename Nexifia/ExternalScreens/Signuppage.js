@@ -1,5 +1,5 @@
 //Important React dependencies
-import React from "react";
+import React, { useEffect, useState, useRef } from "react";
 import {
   Text,
   Image,
@@ -7,13 +7,52 @@ import {
   TouchableOpacity,
   TextInput,
   ImageBackground,
+  KeyboardAvoidingView,
 } from "react-native";
 
 //Database Dependencies
 
 export const Signuppage = ({ navigation }) => {
+  // Initializing the email, password and the confirmPassword using useState
+  const [email, setEmail] = useState("");
+  const [confirmEmail, setConfirmEmail] = useState(""); // Confirm State
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState(""); // Confirm State
+
+  //Time to do some error handling
+  const [showErrors, setShowErrors] = useState(false);
+  const [errors, setErrors] = useState({});
+
+  const getErrors = (email, confirmEmail, password, confirmPassword) => {
+    const errors = {};
+    // This is the error handling for the email
+    if (!email) {
+      // If there is no email value in the text input display the message below
+      errors.email = "Please Enter Your Email";
+    } else if (!email.includes("@") || !email.includes(".com")) {
+      // If there is no @ sign and .com in the email display the message below
+      errors.email = "Please Enter a Proper Email (johndoe@whatever.com)";
+    }
+
+    //This will be the error handling for the confirmEmail
+    //This will be the error handling for the Password
+    //This will be the error handling for the confirmPassword
+    return errors;
+  };
+
+  // To visualize the onPress action of the button
+  const handleRegister = () => {
+    const errors = getErrors(email, password, confirmPassword);
+    if (Object.keys(errors).length > 0) {
+      setShowErrors(true);
+      setErrors(showErrors && errors);
+      console.log(errors);
+    }
+    console.log("Registered");
+  };
+
   return (
-    <View
+    <KeyboardAvoidingView
       style={{
         flex: 1,
         display: "flex",
@@ -61,6 +100,9 @@ export const Signuppage = ({ navigation }) => {
         >
           <TextInput
             placeholder="Type Your Email Address"
+            keyboardType="email-address"
+            value={email}
+            onChangeText={(e) => setEmail(e)}
             placeholderTextColor={"#7D7E80"}
             style={{
               marginBottom: 13,
@@ -76,6 +118,9 @@ export const Signuppage = ({ navigation }) => {
           <TextInput
             placeholder="Confirm Your Email Address"
             placeholderTextColor={"#7D7E80"}
+            keyboardType="email-address"
+            value={confirmEmail}
+            onChangeText={(e) => setConfirmEmail(e)}
             style={{
               marginBottom: 13,
               backgroundColor: "#131417",
@@ -90,6 +135,10 @@ export const Signuppage = ({ navigation }) => {
           <TextInput
             placeholder="Create A Password"
             placeholderTextColor={"#7D7E80"}
+            keyboardType="visible-password"
+            value={password}
+            onChangeText={(e) => setPassword(e)}
+            secureTextEntry
             style={{
               marginBottom: 13,
               backgroundColor: "#131417",
@@ -104,6 +153,10 @@ export const Signuppage = ({ navigation }) => {
           <TextInput
             placeholder="Confirm Your Password"
             placeholderTextColor={"#7D7E80"}
+            keyboardType="visible-password"
+            value={confirmPassword}
+            onChangeText={(e) => setConfirmPassword(e)}
+            secureTextEntry
             style={{
               backgroundColor: "#131417",
               padding: 10,
@@ -116,7 +169,8 @@ export const Signuppage = ({ navigation }) => {
           />
         </View>
         <TouchableOpacity
-          onPress={() => navigation.navigate("OnBoarding")}
+          // onPress={() => navigation.navigate("OnBoarding")} // for the sake of testing the button functionality
+          onPress={() => handleRegister()}
           style={{
             // padding: 20,
             paddingBottom: 12,
@@ -167,6 +221,6 @@ export const Signuppage = ({ navigation }) => {
           <Image source={require("../assets/arrow.png")} />
         </View>
       </TouchableOpacity>
-    </View>
+    </KeyboardAvoidingView>
   );
 };

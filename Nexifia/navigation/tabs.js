@@ -46,7 +46,7 @@ const CustomTabBarButton = ({ children, onPress }) => (
   </TouchableOpacity>
 );
 
-const Tabs = () => {
+const Tabs = ({navigation}) => {
   return (
     <Tab.Navigator
       screenOptions={{
