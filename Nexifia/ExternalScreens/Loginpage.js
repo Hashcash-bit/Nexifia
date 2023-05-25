@@ -1,5 +1,6 @@
 //Important React dependencies
-import React, { useState, useEffect, useRef } from "react";
+import { Ionicons } from "@expo/vector-icons";
+import React, { useEffect, useState, useRef } from "react";
 import {
   Text,
   Image,
@@ -8,13 +9,94 @@ import {
   TextInput,
   ImageBackground,
   KeyboardAvoidingView,
+  ToastAndroid,
 } from "react-native";
 
 //Database Dependencies
 
 const Loginpage = ({ navigation }) => {
+  // Initializing the email, password and the confirmPassword using useState
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  // Making sure that the user can see toggle their password
+  const [hidePassword, setHidePassword] = useState(false);
+
+  // Some regex error catching const method (pretty cool)--
+  const lowercaseRegex = /[a-z]/; //                      |
+  const uppercaseRegex = /[A-Z]/; //                      |
+  const numberRegex = /[0-9]/; //                         |
+  // ------------------------------------------------------
+
+  //Time to do some error handling
+  const [showErrors, setShowErrors] = useState(false);
+  const [errors, setErrors] = useState({});
+
+  const getErrors = (email, password) => {
+    const errors = {};
+    // This is the error handling for the email
+    if (!email) {
+      // If there is no email value in the text input display the message below
+      errors.email = "Please enter your email";
+    } else if (!email.includes("@") || !email.includes(".com")) {
+      // If there is no @ sign and .com in the email display the message below
+      errors.email = "Please enter a proper email (johndoe@whatever.com)";
+    }
+
+    //This will be the error handling for the Password
+    if (!password) {
+      // If there is no password in the text field display the message below
+      errors.password = "Please enter your password";
+    } else if (password.length < 8) {
+      // If the password is less than 8 characters long display the message below
+      errors.password = "The password must be at least 8 characters long";
+    } else if (
+      !password.includes("!") &&
+      !password.includes("@") &&
+      !password.includes("#") &&
+      !password.includes("$") &&
+      !password.includes("%") &&
+      !password.includes("^") &&
+      !password.includes("&")
+    ) {
+      // If the password doesnt include any of the following characters display the message below
+      errors.password =
+        "Your password must include any of these following symbols (!,@,#,$,%,^,&)";
+    } else if (password === email) {
+      // If password and email are the same display the message below
+      errors.password =
+        "Please make sure that your email and passwords are not the same";
+    } else if (!lowercaseRegex.test(password)) {
+      // If the password doesnt include a small letter display the message below
+      errors.password = "Please include at least 1 small letter";
+    } else if (!uppercaseRegex.test(password)) {
+      // If the password doesnt include any Capital letters display the message below
+      errors.password = "Please include at least 1 capital letter";
+    } else if (!numberRegex.test(password)) {
+      // If the password doesnt include a number display the message below
+      errors.password = "Please include at least 1 number";
+    }
+
+    return errors;
+  };
+
+  const handleLogin = () => {
+    const errors = getErrors(email, password);
+    if (Object.keys(errors).length > 0) {
+      setShowErrors(true);
+      setErrors(showErrors && errors);
+      console.log(errors, email, password);
+
+      Object.values(errors).forEach((errorMsg) => {
+        ToastAndroid.show(errorMsg, ToastAndroid.SHORT);
+      });
+    } else {
+      console.log("Login");
+      setErrors({});
+      // setshowErrors(false);
+      ToastAndroid.show("Registered", ToastAndroid.TOP, ToastAndroid.LONG);
+    }
+  };
 
   return (
     <KeyboardAvoidingView
@@ -95,10 +177,18 @@ const Loginpage = ({ navigation }) => {
               borderRadius: 15,
             }}
           />
+          {password.length > 0 && (
+            <TouchableOpacity>
+              <Ionicons
+                name={hidePassword ? "eye-sharp" : "eye-off-sharp"}
+                style={{ fontSize: 20, color: "yellow" }}
+              />
+            </TouchableOpacity>
+          )}
         </View>
         <TouchableOpacity
-          onPress={() => navigation.navigate("InternalStack")} // This is before the logic was inmplemented
-          // onPress={() => {}} // This is when firebase auth is implemented
+          // onPress={() => navigation.navigate("InternalStack")} // This is before the logic was implemented
+          onPress={() => handleLogin()} // This is when firebase auth is implemented
           style={{
             // padding: 20,
             paddingBottom: 12,

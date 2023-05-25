@@ -71,10 +71,13 @@ export const Signuppage = ({ navigation }) => {
       errors.password =
         "Please make sure that your email and passwords are not the same";
     } else if (!lowercaseRegex.test(password)) {
+      // If the password doesnt include a small letter display the message below
       errors.password = "Please include at least 1 small letter";
     } else if (!uppercaseRegex.test(password)) {
+      // If the password doesnt include any Capital letters display the message below
       errors.password = "Please include at least 1 capital letter";
     } else if (!numberRegex.test(password)) {
+      // If the password doesnt include a number display the message below
       errors.password = "Please include at least 1 number";
     }
 
@@ -100,7 +103,7 @@ export const Signuppage = ({ navigation }) => {
     } else {
       console.log("Registered");
       setErrors({});
-      showErrors(false);
+      // setshowErrors();
       ToastAndroid.show("Registered", ToastAndroid.TOP, ToastAndroid.LONG);
     }
   };
@@ -190,7 +193,6 @@ export const Signuppage = ({ navigation }) => {
           <TextInput
             placeholder="Create A Password"
             placeholderTextColor={"#7D7E80"}
-            keyboardType="visible-password"
             value={password}
             onChangeText={(e) => setPassword(e)}
             secureTextEntry
@@ -208,7 +210,6 @@ export const Signuppage = ({ navigation }) => {
           <TextInput
             placeholder="Confirm Your Password"
             placeholderTextColor={"#7D7E80"}
-            keyboardType="visible-password"
             value={confirmPassword}
             onChangeText={(e) => setConfirmPassword(e)}
             secureTextEntry
@@ -227,7 +228,6 @@ export const Signuppage = ({ navigation }) => {
           // onPress={() => navigation.navigate("OnBoarding")} // for the sake of testing the button functionality
           onPress={() => handleRegister()}
           style={{
-            // padding: 20,
             paddingBottom: 12,
             paddingTop: 12,
             backgroundColor: "#6C63FF",
