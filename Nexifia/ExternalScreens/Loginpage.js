@@ -20,7 +20,7 @@ const Loginpage = ({ navigation }) => {
   const [password, setPassword] = useState("");
 
   // Making sure that the user can see toggle their password
-  const [hidePassword, setHidePassword] = useState(false);
+  const [hidePassword, setHidePassword] = useState(true);
 
   // Some regex error catching const method (pretty cool)--
   const lowercaseRegex = /[a-z]/; //                      |
@@ -149,7 +149,7 @@ const Loginpage = ({ navigation }) => {
             placeholder="Email Address"
             placeholderTextColor={"#7D7E80"}
             value={email} // Initialize this in the code above (the value of email will go to this text input) (UNCOMMENT LATER)
-            onChangeText={(text) => setEmail(text)} // This code handles the text change | whenever the input is changed this line of code will pick it up and replace the "text" variable with the value
+            onChangeText={(e) => setEmail(e)} // This code handles the text change | whenever the input is changed this line of code will pick it up and replace the "text" variable with the value
             style={{
               marginBottom: 13,
               backgroundColor: "#131417",
@@ -161,30 +161,54 @@ const Loginpage = ({ navigation }) => {
               borderRadius: 15,
             }}
           />
-          <TextInput
-            placeholder="Password"
-            placeholderTextColor={"#7D7E80"}
-            value={password} // Initialize this in the code above (the value of password will go to this text input) (UNCOMMENT LATER)
-            onChangeText={(text) => setPassword(text)} // This code handles the text change | whenever the input is changed this line of code will pick it up and replace the "text" variable with the value
-            secureTextEntry
+          <View
             style={{
-              backgroundColor: "#131417",
-              padding: 10,
-              borderWidth: 0.5,
-              borderColor: "white",
-              color: "white",
-              fontWeight: "bold",
-              borderRadius: 15,
+              display: "flex",
+              flexDirection: "row",
+              alignContent: "center",
+              justifyContent: "center",
             }}
-          />
-          {password.length > 0 && (
-            <TouchableOpacity>
-              <Ionicons
-                name={hidePassword ? "eye-sharp" : "eye-off-sharp"}
-                style={{ fontSize: 20, color: "yellow" }}
-              />
-            </TouchableOpacity>
-          )}
+          >
+            <TextInput
+              placeholder="Password"
+              placeholderTextColor={"#7D7E80"}
+              value={password} // Initialize this in the code above (the value of password will go to this text input) (UNCOMMENT LATER)
+              onChangeText={(e) => setPassword(e)} // This code handles the text change | whenever the input is changed this line of code will pick it up and replace the "text" variable with the value
+              secureTextEntry={hidePassword ? true : false}
+              style={{
+                backgroundColor: "#131417",
+                padding: 10,
+                borderWidth: 0.5,
+                borderColor: "white",
+                color: "white",
+                fontWeight: "bold",
+                borderRadius: 15,
+                display: "flex",
+                width: 326,
+                alignSelf: "center",
+              }}
+            />
+            {password.length > 0 && (
+              <TouchableOpacity
+                onPress={() => setHidePassword(!hidePassword)}
+                style={{
+                  zIndex: 10,
+                  alignSelf: "center",
+                }}
+              >
+                <Ionicons
+                  name={hidePassword ? "eye-sharp" : "eye-off-sharp"}
+                  style={{
+                    fontSize: 15,
+                    color: "white",
+                    marginLeft: -60,
+                    padding: 15,
+                    alignSelf: "center",
+                  }}
+                />
+              </TouchableOpacity>
+            )}
+          </View>
         </View>
         <TouchableOpacity
           // onPress={() => navigation.navigate("InternalStack")} // This is before the logic was implemented
