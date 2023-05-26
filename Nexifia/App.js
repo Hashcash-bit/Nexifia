@@ -19,6 +19,9 @@ import HistoryScreen from "./InternalScreens/HistoryScreen";
 import DocumentScreen from "./InternalScreens/DocumentScreen";
 import SearchScreen from "./InternalScreens/SearchScreen";
 
+// Import the Status Bar
+import { StatusBar } from "expo-status-bar";
+
 const App = () => {
   const Stack = createNativeStackNavigator();
 
@@ -32,7 +35,11 @@ const App = () => {
         <Stack.Screen name="LogIn" component={Loginpage} />
         <Stack.Screen name="SignUp" component={Signuppage} />
         {/* This will be the protected route */}
-        <Stack.Screen name="InternalStack" component={Tabs} />
+        <Stack.Screen
+          name="InternalStack"
+          component={Tabs}
+          options={{ headerShown: false }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

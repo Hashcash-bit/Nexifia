@@ -1,5 +1,4 @@
 //Important React dependencies
-import { Ionicons } from "@expo/vector-icons";
 import React, { useEffect, useState, useRef } from "react";
 import {
   Text,
@@ -10,9 +9,15 @@ import {
   ImageBackground,
   KeyboardAvoidingView,
   ToastAndroid,
+  ActivityIndicator,
 } from "react-native";
 
-//Database Dependencies
+//Icons
+import { Ionicons } from "@expo/vector-icons";
+
+//Auth Dependencies
+import { firebase_auth } from "../firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 const Loginpage = ({ navigation }) => {
   // Initializing the email, password and the confirmPassword using useState
@@ -60,8 +65,7 @@ const Loginpage = ({ navigation }) => {
       !password.includes("&")
     ) {
       // If the password doesnt include any of the following characters display the message below
-      errors.password =
-        "Your password must include any of these following symbols (!,@,#,$,%,^,&)";
+      errors.password = "Password must include any of these (!,@,#,$,%,^,&)";
     } else if (password === email) {
       // If password and email are the same display the message below
       errors.password =
@@ -80,23 +84,45 @@ const Loginpage = ({ navigation }) => {
     return errors;
   };
 
-  const handleLogin = () => {
+  //To visualize the onPress action of the button, hence the console logs at each step
+  const handleLogin = async () => {
+    //gotta create a try and catch and sign in with email and password
     const errors = getErrors(email, password);
     if (Object.keys(errors).length > 0) {
       setShowErrors(true);
       setErrors(showErrors && errors);
       console.log(errors, email, password);
-
       Object.values(errors).forEach((errorMsg) => {
         ToastAndroid.show(errorMsg, ToastAndroid.SHORT);
       });
     } else {
-      console.log("Login");
-      setErrors({});
-      // setshowErrors(false);
-      ToastAndroid.show("Registered", ToastAndroid.TOP, ToastAndroid.LONG);
+      //Try will start Here:
+      try {
+        // Sign in with email and password
+        const response = await signInWithEmailAndPassword(
+          firebase_auth,
+          email,
+          password
+        );
+        // Handle successful Log in
+        ToastAndroid.show("Logged in successfully!", ToastAndroid.SHORT);
+        // Redirect or perform any necessary actions
+        navigation.navigate("InternalStack");
+        console.log("Login");
+        setErrors({});
+      } catch (error) {
+        //Handle the sign-in errors
+        ToastAndroid.show(error.message, ToastAndroid.SHORT);
+      } finally {
+        alert("Login failed, you may not have an account with this email");
+        // To observe the error in the console and debugg
+        console.log("Login has failed");
+      }
     }
   };
+
+  //firebase initialization
+  const auth = firebase_auth;
 
   return (
     <KeyboardAvoidingView

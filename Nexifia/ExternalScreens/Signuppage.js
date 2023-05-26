@@ -9,9 +9,15 @@ import {
   ImageBackground,
   KeyboardAvoidingView,
   ToastAndroid,
+  ActivityIndicator,
 } from "react-native";
 
+//Icons
+import { Ionicons } from "@expo/vector-icons";
+
 //Database Dependencies
+import { firebase_auth } from "../firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 export const Signuppage = ({ navigation }) => {
   // Initializing the email, password and the confirmPassword using useState
@@ -19,6 +25,9 @@ export const Signuppage = ({ navigation }) => {
   const [confirmEmail, setConfirmEmail] = useState(""); // Confirm State
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState(""); // Confirm State
+
+  // Make sure that the user can see their password lol
+  const [hidePassword, setHidePassword] = useState(true);
 
   // Some regex error catching const method (pretty cool)--
   const lowercaseRegex = /[a-z]/; //                      |
@@ -89,8 +98,9 @@ export const Signuppage = ({ navigation }) => {
     return errors;
   };
 
-  // To visualize the onPress action of the button
-  const handleRegister = () => {
+  // To visualize the onPress action of the button, hence the console logs at each step
+  const handleRegister = async () => {
+    // Using the try and catch method to create a user
     const errors = getErrors(email, confirmEmail, password, confirmPassword);
     if (Object.keys(errors).length > 0) {
       setShowErrors(true);
@@ -101,12 +111,37 @@ export const Signuppage = ({ navigation }) => {
         ToastAndroid.show(errorMsg, ToastAndroid.SHORT);
       });
     } else {
-      console.log("Registered");
-      setErrors({});
-      // setshowErrors();
-      ToastAndroid.show("Registered", ToastAndroid.TOP, ToastAndroid.LONG);
+      // Try will start here:
+      try {
+        const response = await createUserWithEmailAndPassword(
+          firebase_auth,
+          email,
+          password
+        );
+        // Handle successful Sign Up
+        ToastAndroid.show(
+          "You have successfully created an account!",
+          ToastAndroid.SHORT
+        );
+        //Redirect to the desired path
+        navigation.navigate("InternalStack");
+        console.log("Registered");
+        setErrors({});
+      } catch (error) {
+        //Handle the Sign Up errors
+        ToastAndroid.show(error.message, ToastAndroid.SHORT);
+      } finally {
+        alert(
+          "Registration failed, you may already have an account with this email"
+        );
+        // To observe the error in the console and debugg
+        console.log("Registration has failed");
+      }
     }
   };
+
+  //firebase initialization
+  const auth = firebase_auth;
 
   return (
     <KeyboardAvoidingView
@@ -145,7 +180,7 @@ export const Signuppage = ({ navigation }) => {
           justifyContent: "center",
         }}
       >
-        {/* I want this to be the two login form input fields */}
+        {/* I want this to be the four Sign up form input fields */}
         <View
           style={{
             width: 326,
@@ -190,39 +225,108 @@ export const Signuppage = ({ navigation }) => {
               borderRadius: 15,
             }}
           />
-          <TextInput
-            placeholder="Create A Password"
-            placeholderTextColor={"#7D7E80"}
-            value={password}
-            onChangeText={(e) => setPassword(e)}
-            secureTextEntry
+          <View
             style={{
-              marginBottom: 13,
-              backgroundColor: "#131417",
-              padding: 10,
-              borderWidth: 0.5,
-              borderColor: "white",
-              color: "white",
-              fontWeight: "bold",
-              borderRadius: 15,
+              display: "flex",
+              flexDirection: "row",
+              alignContent: "center",
+              justifyContent: "center",
             }}
-          />
-          <TextInput
-            placeholder="Confirm Your Password"
-            placeholderTextColor={"#7D7E80"}
-            value={confirmPassword}
-            onChangeText={(e) => setConfirmPassword(e)}
-            secureTextEntry
+          >
+            <TextInput
+              placeholder="Create A Password"
+              placeholderTextColor={"#7D7E80"}
+              value={password}
+              onChangeText={(e) => setPassword(e)}
+              secureTextEntry={hidePassword ? true : false}
+              style={{
+                marginBottom: 13,
+                backgroundColor: "#131417",
+                padding: 10,
+                borderWidth: 0.5,
+                borderColor: "white",
+                color: "white",
+                fontWeight: "bold",
+                borderRadius: 15,
+                display: "flex",
+                width: 326,
+                alignSelf: "center",
+              }}
+            />
+            {password.length > 0 && (
+              <TouchableOpacity
+                onPress={() => setHidePassword(!hidePassword)}
+                style={{
+                  zIndex: 10,
+                  alignSelf: "center",
+                  alignContent: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <Ionicons
+                  name={hidePassword ? "eye-sharp" : "eye-off-sharp"}
+                  style={{
+                    fontSize: 15,
+                    color: "white",
+                    marginLeft: -60,
+                    marginBottom: 12,
+                    padding: 15,
+                    alignSelf: "center",
+                  }}
+                />
+              </TouchableOpacity>
+            )}
+          </View>
+          <View
             style={{
-              backgroundColor: "#131417",
-              padding: 10,
-              borderWidth: 0.5,
-              borderColor: "white",
-              color: "white",
-              fontWeight: "bold",
-              borderRadius: 15,
+              display: "flex",
+              flexDirection: "row",
+              alignContent: "center",
+              justifyContent: "center",
             }}
-          />
+          >
+            <TextInput
+              placeholder="Confirm Your Password"
+              placeholderTextColor={"#7D7E80"}
+              value={confirmPassword}
+              onChangeText={(e) => setConfirmPassword(e)}
+              secureTextEntry={hidePassword ? true : false}
+              style={{
+                backgroundColor: "#131417",
+                padding: 10,
+                borderWidth: 0.5,
+                borderColor: "white",
+                color: "white",
+                fontWeight: "bold",
+                borderRadius: 15,
+                display: "flex",
+                width: 326,
+                alignSelf: "center",
+              }}
+            />
+            {confirmPassword.length > 0 && (
+              <TouchableOpacity
+                onPress={() => setHidePassword(!hidePassword)}
+                style={{
+                  zIndex: 10,
+                  alignSelf: "center",
+                  alignContent: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <Ionicons
+                  name={hidePassword ? "eye-sharp" : "eye-off-sharp"}
+                  style={{
+                    fontSize: 15,
+                    color: "white",
+                    marginLeft: -60,
+                    padding: 15,
+                    alignSelf: "center",
+                  }}
+                />
+              </TouchableOpacity>
+            )}
+          </View>
         </View>
         <TouchableOpacity
           // onPress={() => navigation.navigate("OnBoarding")} // for the sake of testing the button functionality
