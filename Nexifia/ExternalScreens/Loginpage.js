@@ -268,6 +268,7 @@ const Loginpage = ({ navigation }) => {
 
 export default Loginpage;
 
-//final comments:
+// Conclusive comments:
 // The login page is complete and all the features work as advised
-// Next Steps
+// Next Steps:
+// When there is no account associated with the credentials entered, there is an error in the toast that doesnt have any proper meaning. Hve to fix that
