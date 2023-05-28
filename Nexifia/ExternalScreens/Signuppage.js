@@ -130,13 +130,13 @@ export const Signuppage = ({ navigation }) => {
       } catch (error) {
         //Handle the Sign Up errors
         ToastAndroid.show(error.message, ToastAndroid.SHORT);
-      } finally {
         alert(
           "Registration failed, you may already have an account with this email"
         );
         // To observe the error in the console and debugg
         console.log("Registration has failed");
       }
+      // There is no need for the finally block
     }
   };
 
@@ -388,3 +388,5 @@ export const Signuppage = ({ navigation }) => {
     </KeyboardAvoidingView>
   );
 };
+
+// Co

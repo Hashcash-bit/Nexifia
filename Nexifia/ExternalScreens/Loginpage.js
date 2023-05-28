@@ -89,6 +89,7 @@ const Loginpage = ({ navigation }) => {
         // To observe the error in the console and debugg
         console.log("Login has failed");
       }
+      // No need for a finally block
     }
   };
 
@@ -267,8 +268,3 @@ const Loginpage = ({ navigation }) => {
 };
 
 export default Loginpage;
-
-// Conclusive comments:
-// The login page is complete and all the features work as advised
-// Next Steps:
-// When there is no account associated with the credentials entered, there is an error in the toast that doesnt have any proper meaning. Hve to fix that
