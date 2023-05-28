@@ -28,6 +28,7 @@ export const Signuppage = ({ navigation }) => {
 
   // Make sure that the user can see their password lol
   const [hidePassword, setHidePassword] = useState(true);
+  const [hideConfirmPassword, setHideConfirmPassword] = useState(true);
 
   // Some regex error catching const method (pretty cool)--
   const lowercaseRegex = /[a-z]/; //                      |
@@ -73,8 +74,7 @@ export const Signuppage = ({ navigation }) => {
       !password.includes("&")
     ) {
       // If the password doesnt include any of the following characters display the message below
-      errors.password =
-        "Your password must include any of these following symbols (!,@,#,$,%,^,&)";
+      errors.password = "Password must include any of these (!,@,#,$,%,^,&)";
     } else if (password === email) {
       // If password and email are the same display the message below
       errors.password =
@@ -145,6 +145,7 @@ export const Signuppage = ({ navigation }) => {
 
   return (
     <KeyboardAvoidingView
+      behavior="padding"
       style={{
         flex: 1,
         display: "flex",
@@ -193,6 +194,7 @@ export const Signuppage = ({ navigation }) => {
           <TextInput
             placeholder="Type Your Email Address"
             keyboardType="email-address"
+            autoCapitalize="none"
             value={email}
             onChangeText={(e) => setEmail(e)}
             placeholderTextColor={"#7D7E80"}
@@ -210,6 +212,7 @@ export const Signuppage = ({ navigation }) => {
 
           <TextInput
             placeholder="Confirm Your Email Address"
+            autoCapitalize="none"
             placeholderTextColor={"#7D7E80"}
             keyboardType="email-address"
             value={confirmEmail}
@@ -236,6 +239,7 @@ export const Signuppage = ({ navigation }) => {
             <TextInput
               placeholder="Create A Password"
               placeholderTextColor={"#7D7E80"}
+              autoCapitalize="none"
               value={password}
               onChangeText={(e) => setPassword(e)}
               secureTextEntry={hidePassword ? true : false}
@@ -288,9 +292,10 @@ export const Signuppage = ({ navigation }) => {
             <TextInput
               placeholder="Confirm Your Password"
               placeholderTextColor={"#7D7E80"}
+              autoCapitalize="none"
               value={confirmPassword}
               onChangeText={(e) => setConfirmPassword(e)}
-              secureTextEntry={hidePassword ? true : false}
+              secureTextEntry={hideConfirmPassword ? true : false}
               style={{
                 backgroundColor: "#131417",
                 padding: 10,
@@ -306,7 +311,7 @@ export const Signuppage = ({ navigation }) => {
             />
             {confirmPassword.length > 0 && (
               <TouchableOpacity
-                onPress={() => setHidePassword(!hidePassword)}
+                onPress={() => setHideConfirmPassword(!hideConfirmPassword)}
                 style={{
                   zIndex: 10,
                   alignSelf: "center",
@@ -315,7 +320,7 @@ export const Signuppage = ({ navigation }) => {
                 }}
               >
                 <Ionicons
-                  name={hidePassword ? "eye-sharp" : "eye-off-sharp"}
+                  name={hideConfirmPassword ? "eye-sharp" : "eye-off-sharp"}
                   style={{
                     fontSize: 15,
                     color: "white",

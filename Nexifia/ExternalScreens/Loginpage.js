@@ -52,35 +52,7 @@ const Loginpage = ({ navigation }) => {
     if (!password) {
       // If there is no password in the text field display the message below
       errors.password = "Please enter your password";
-    } else if (password.length < 8) {
-      // If the password is less than 8 characters long display the message below
-      errors.password = "The password must be at least 8 characters long";
-    } else if (
-      !password.includes("!") &&
-      !password.includes("@") &&
-      !password.includes("#") &&
-      !password.includes("$") &&
-      !password.includes("%") &&
-      !password.includes("^") &&
-      !password.includes("&")
-    ) {
-      // If the password doesnt include any of the following characters display the message below
-      errors.password = "Password must include any of these (!,@,#,$,%,^,&)";
-    } else if (password === email) {
-      // If password and email are the same display the message below
-      errors.password =
-        "Please make sure that your email and passwords are not the same";
-    } else if (!lowercaseRegex.test(password)) {
-      // If the password doesnt include a small letter display the message below
-      errors.password = "Please include at least 1 small letter";
-    } else if (!uppercaseRegex.test(password)) {
-      // If the password doesnt include any Capital letters display the message below
-      errors.password = "Please include at least 1 capital letter";
-    } else if (!numberRegex.test(password)) {
-      // If the password doesnt include a number display the message below
-      errors.password = "Please include at least 1 number";
     }
-
     return errors;
   };
 
@@ -113,8 +85,7 @@ const Loginpage = ({ navigation }) => {
       } catch (error) {
         //Handle the sign-in errors
         ToastAndroid.show(error.message, ToastAndroid.SHORT);
-      } finally {
-        alert("Login failed, you may not have an account with this email");
+        alert("Please check you credentials, you may not have and account");
         // To observe the error in the console and debugg
         console.log("Login has failed");
       }
@@ -172,6 +143,7 @@ const Loginpage = ({ navigation }) => {
           }}
         >
           <TextInput
+            autoCapitalize="none"
             placeholder="Email Address"
             placeholderTextColor={"#7D7E80"}
             value={email} // Initialize this in the code above (the value of email will go to this text input) (UNCOMMENT LATER)
@@ -196,6 +168,7 @@ const Loginpage = ({ navigation }) => {
             }}
           >
             <TextInput
+              autoCapitalize="none"
               placeholder="Password"
               placeholderTextColor={"#7D7E80"}
               value={password} // Initialize this in the code above (the value of password will go to this text input) (UNCOMMENT LATER)
@@ -294,3 +267,7 @@ const Loginpage = ({ navigation }) => {
 };
 
 export default Loginpage;
+
+//final comments:
+// The login page is complete and all the features work as advised
+// Next Steps
