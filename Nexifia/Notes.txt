@@ -2,6 +2,12 @@ NEXIFIA TASKS
 
 DONE: --------------------------------------------------------------------------------------------------------------
 
+OnBoarding Page:
+    Conclusive Comments:
+        The page is done I incorporated the "already logged in" feature to the button redirect
+    Next Steps:
+        I want to make it so that the image changes to a medical quote
+
 Login Page:
     Conclusive comments:
         The login page is complete and all the features work as advised
@@ -15,11 +21,7 @@ Sign Up Page:
 
 IN PROGRESS: -------------------------------------------------------------------------------------------------------
 
-OnBoarding Page:
-    Conclusive Comments:
-        The page is done I incorporated the "already logged in" feature to the button redirect
-    Next Steps:
-        I want to make it so that the image changes to a medical quote
+
 
 NEED TO START: -----------------------------------------------------------------------------------------------------
 
