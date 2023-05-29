@@ -15,6 +15,7 @@ import { firebase_auth } from "../firebase";
 
 const Landingpage = ({ navigation }) => {
   const [user, setUser] = useState(null);
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(firebase_auth, (user) => {
       setUser(user);
@@ -74,15 +75,29 @@ const Landingpage = ({ navigation }) => {
           marginTop: 0,
         }}
       >
-        <Image
-          source={require("../assets/phone2.png")}
-          style={{
-            width: 259,
-            height: 530,
-            justifyContent: "flex-end",
-            alignItems: "center",
-          }}
-        />
+        {!user ? (
+          // User is not logged in show this image
+          <Image
+            source={require("../assets/phone2.png")}
+            style={{
+              width: 259,
+              height: 530,
+              justifyContent: "flex-end",
+              alignItems: "center",
+            }}
+          />
+        ) : (
+          // When user is logged in show this screen
+          <Image
+            source={require("../assets/Onboard.png")}
+            style={{
+              width: 259,
+              height: 530,
+              justifyContent: "flex-end",
+              alignItems: "center",
+            }}
+          />
+        )}
       </View>
       <Image
         source={require("../assets/tng.png")}
@@ -93,9 +108,7 @@ const Landingpage = ({ navigation }) => {
           marginBottom: 43,
         }}
       />
-      <TouchableOpacity
-      onPress={handleRedirect}
-      >
+      <TouchableOpacity onPress={handleRedirect}>
         <View
           style={{
             width: 60,
@@ -107,7 +120,12 @@ const Landingpage = ({ navigation }) => {
             bottom: 30,
           }}
         >
-          <Image source={require("../assets/arrow.png")} />
+          {!user ? (
+            // User doesnt not exist display this
+            <Image source={require("../assets/arrow.png")} />
+          ) : (
+            <Image source={require("../assets/arrow2.png")} />
+          )}
         </View>
       </TouchableOpacity>
     </View>

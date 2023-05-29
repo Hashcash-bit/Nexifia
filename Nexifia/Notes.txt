@@ -9,7 +9,7 @@ Login Page:
         When there is no account associated with the credentials entered, 
         there is an error in the toast that doesnt have any proper meaning. Have to fix that!
 
-Sign Up Page :
+Sign Up Page:
     Conclusive comments:
         The login page is complete and all the features work as advised
 
@@ -19,7 +19,7 @@ OnBoarding Page:
     Conclusive Comments:
         The page is done I incorporated the "already logged in" feature to the button redirect
     Next Steps:
-        I want to make it so that the button changes when the user is already logged in
+        I want to make it so that the image changes to a medical quote
 
 NEED TO START: -----------------------------------------------------------------------------------------------------
 
