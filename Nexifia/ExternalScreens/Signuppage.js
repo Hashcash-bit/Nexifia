@@ -19,7 +19,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { firebase_auth } from "../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 
-export const Signuppage = ({ navigation }) => {
+export default Signuppage = ({ navigation }) => {
   // Initializing the email, password and the confirmPassword using useState
   const [email, setEmail] = useState("");
   const [confirmEmail, setConfirmEmail] = useState(""); // Confirm State
@@ -124,7 +124,7 @@ export const Signuppage = ({ navigation }) => {
           ToastAndroid.SHORT
         );
         //Redirect to the desired path
-        navigation.navigate("InternalStack");
+        navigation.navigate("InternalComponents");
         console.log("Registered");
         setErrors({});
       } catch (error) {

@@ -10,7 +10,7 @@ import {
 
 //Import the navigation bar
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}) => {
   return (
     <View
       style={{
@@ -19,7 +19,9 @@ const HomeScreen = () => {
         fontColor: "white",
       }}
     >
-      <Text>poop</Text>
+      <TouchableOpacity onPress={() => navigation.navigate("OnBoarding")}>
+        <Text>Back</Text>
+      </TouchableOpacity>
     </View>
   );
 };

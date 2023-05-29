@@ -1,5 +1,5 @@
 //important Dependencies
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { View } from "react-native";
 
 //Navigation Dependencies
@@ -10,7 +10,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 //External Pages
 import Landingpage from "./ExternalScreens/Landingpage";
 import Loginpage from "./ExternalScreens/Loginpage";
-import { Signuppage } from "./ExternalScreens/Signuppage";
+import Signuppage from "./ExternalScreens/Signuppage";
 
 //Internal Pages
 import HomeScreen from "./InternalScreens/HomeScreen";
@@ -22,27 +22,65 @@ import SearchScreen from "./InternalScreens/SearchScreen";
 // Import the Status Bar
 import { StatusBar } from "expo-status-bar";
 
-const App = () => {
-  const Stack = createNativeStackNavigator();
+// Some firebase import
+import { User, onAuthStateChanged } from "firebase/auth";
+import { firebase_auth } from "./firebase";
 
+// Inside Stack and the components
+const InsideStack = createNativeStackNavigator();
+function PrivateStack() {
+  return (
+    <InsideStack.Navigator screenOptions={{ headerShown: false }}>
+      <InsideStack.Screen name="Dashboard" component={Tabs} />
+    </InsideStack.Navigator>
+  );
+}
+
+// Public Stack
+const Stack = createNativeStackNavigator();
+
+export default App = () => {
+  // Create a state for the users presence
+  const [user, setUser] = useState(null);
+  // The loading state variable is used to show a loading screen while checking the authentication state
+  const [loading, setLoading] = useState(true);
+
+  // Lets create quick try catch to detect user presence
+  useEffect(() => {
+    onAuthStateChanged(firebase_auth, (user) => {
+      setUser(user);
+      setLoading(false);
+      console.log("user", user);
+    });
+  }, []);
+
+  if (loading) {
+    // This is where the loading screen will be
+    return <View />;
+  }
   return (
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{ headerShown: false, animation: "slide_from_right" }}
       >
-        {/* App Stack */}
-        <Stack.Screen name="OnBoarding" component={Landingpage} />
-        <Stack.Screen name="LogIn" component={Loginpage} />
-        <Stack.Screen name="SignUp" component={Signuppage} />
-        {/* This will be the protected route */}
-        <Stack.Screen
-          name="InternalStack"
-          component={Tabs}
-          options={{ headerShown: false }}
-        />
+        {!user ? (
+          //User not logged in? Show the external stack
+          <>
+            <Stack.Screen name="OnBoarding" component={Landingpage} />
+            <Stack.Screen name="LogIn" component={Loginpage} />
+            <Stack.Screen name="SignUp" component={Signuppage} />
+          </>
+        ) : (
+          <>
+            <Stack.Screen name="OnBoarding" component={Landingpage} />
+            <Stack.Screen
+              name="InternalComponents"
+              component={PrivateStack}
+              options={{ headerShown: false }}
+            />
+          </>
+        )}
       </Stack.Navigator>
     </NavigationContainer>
   );
 };
-
-export default App;

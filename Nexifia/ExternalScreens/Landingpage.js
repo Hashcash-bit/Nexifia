@@ -1,5 +1,5 @@
 // Important React dependencies
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -9,7 +9,36 @@ import {
   TouchableOpacity,
 } from "react-native";
 
+//Some firebase dependencies
+import { onAuthStateChanged } from "firebase/auth";
+import { firebase_auth } from "../firebase";
+
 const Landingpage = ({ navigation }) => {
+  const [user, setUser] = useState(null);
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(firebase_auth, (user) => {
+      setUser(user);
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
+  const handleRedirect = () => {
+    if (user) {
+      // User is already logged in, navigate to the Internal Stack
+      navigation.navigate("InternalComponents");
+      if (user.email && user.uid) {
+        console.log("User Email:", user.email);
+        console.log("User UID:", user.uid);
+        console.log("Status: Logged In");
+      }
+    } else {
+      // User is not logged in, navigate to the Login page
+      navigation.navigate("LogIn");
+    }
+  };
   return (
     <View
       style={{
@@ -64,7 +93,9 @@ const Landingpage = ({ navigation }) => {
           marginBottom: 43,
         }}
       />
-      <TouchableOpacity onPress={() => navigation.navigate("LogIn")}>
+      <TouchableOpacity
+      onPress={handleRedirect}
+      >
         <View
           style={{
             width: 60,

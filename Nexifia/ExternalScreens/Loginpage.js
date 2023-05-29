@@ -79,7 +79,7 @@ const Loginpage = ({ navigation }) => {
         // Handle successful Log in
         ToastAndroid.show("Logged in successfully!", ToastAndroid.SHORT);
         // Redirect or perform any necessary actions
-        navigation.navigate("InternalStack");
+        navigation.navigate("InternalComponents");
         console.log("Login");
         setErrors({});
       } catch (error) {
