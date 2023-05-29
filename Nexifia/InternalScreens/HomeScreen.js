@@ -22,6 +22,9 @@ const HomeScreen = ({navigation}) => {
       <TouchableOpacity onPress={() => navigation.navigate("OnBoarding")}>
         <Text>Back</Text>
       </TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate("OnBoarding")}>
+        <Text>Logout</Text>
+      </TouchableOpacity>
     </View>
   );
 };
