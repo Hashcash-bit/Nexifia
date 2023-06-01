@@ -22,9 +22,14 @@ import SearchScreen from "./InternalScreens/SearchScreen";
 // Import the Status Bar
 import { StatusBar } from "expo-status-bar";
 
+// Toast
+
 // Some firebase import
 import { User, onAuthStateChanged } from "firebase/auth";
 import { firebase_auth } from "./firebase";
+
+// Test Screens
+import LogoutConfirmationScreen from "./InternalScreens/ConfirmLogout/LogoutConfirmationScreen";
 
 // Inside Stack and the components
 const InsideStack = createNativeStackNavigator();
@@ -66,6 +71,11 @@ export default App = () => {
         {!user ? (
           //User not logged in? Show the external stack
           <>
+            <Stack.Screen
+              name="/"
+              component={Tabs}
+              screenOptions={{ headerShown: false }}
+            />
             <Stack.Screen name="OnBoarding" component={Landingpage} />
             <Stack.Screen name="LogIn" component={Loginpage} />
             <Stack.Screen name="SignUp" component={Signuppage} />

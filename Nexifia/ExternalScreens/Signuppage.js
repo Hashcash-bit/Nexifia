@@ -388,5 +388,3 @@ export default Signuppage = ({ navigation }) => {
     </KeyboardAvoidingView>
   );
 };
-
-// Co
