@@ -70,12 +70,13 @@ export default App = () => {
       >
         {!user ? (
           //User not logged in? Show the external stack
-          <>
-            <Stack.Screen
+          <> 
+          {/* This will be testing area */}
+            {/* <Stack.Screen
               name="/"
               component={Tabs}
               screenOptions={{ headerShown: false }}
-            />
+            /> */}
             <Stack.Screen name="OnBoarding" component={Landingpage} />
             <Stack.Screen name="LogIn" component={Loginpage} />
             <Stack.Screen name="SignUp" component={Signuppage} />
