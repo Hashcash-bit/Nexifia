@@ -349,7 +349,7 @@ const ProfileScreen = () => {
             style={{
               paddingBottom: 12,
               paddingTop: 12,
-              backgroundColor: "#6C63FF",
+              backgroundColor: "#0708c1",
               borderRadius: 15,
               width: 140,
               alignContent: "center",
@@ -407,7 +407,6 @@ const ProfileScreen = () => {
           <Text
             style={{
               fontSize: 12,
-              fontWeight: "bold",
               color: "#666768",
               marginTop: 5,
             }}
@@ -421,16 +420,15 @@ const ProfileScreen = () => {
             justifyContent: "center",
             alignContent: "center",
             alignItems: "center",
-            // marginLeft: 30,
             marginTop: 11,
             alignSelf: "center",
           }}
         >
           <TouchableOpacity
             style={{
+              backgroundColor: "#6C63FF",
               paddingBottom: 12,
               paddingTop: 12,
-              backgroundColor: "#0708c1",
               borderRadius: 15,
               width: 140,
               alignContent: "center",
