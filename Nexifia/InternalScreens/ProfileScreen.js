@@ -393,12 +393,37 @@ const ProfileScreen = () => {
         </View>
         <View
           style={{
+            borderTopColor: "white",
+            borderTopWidth: StyleSheet.hairlineWidth,
+            width: 300,
+            marginTop: 11,
+            marginLeft: 30,
+            justifyContent: "center",
+            textAlign: "center",
+            alignContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Text
+            style={{
+              fontSize: 12,
+              fontWeight: "bold",
+              color: "#666768",
+              marginTop: 5,
+            }}
+          >
+            Press to <Text style={{ fontWeight: "bold" }}>logout</Text>
+          </Text>
+        </View>
+        <View
+          style={{
             width: 300,
             justifyContent: "center",
             alignContent: "center",
             alignItems: "center",
-            marginLeft: 30,
-            marginTop: 21,
+            // marginLeft: 30,
+            marginTop: 11,
+            alignSelf: "center",
           }}
         >
           <TouchableOpacity
