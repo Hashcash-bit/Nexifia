@@ -53,7 +53,7 @@ const Tabs = ({navigation}) => {
         headerShown: false,
         tabBarShowLabel: false,
         tabBarStyle: {
-          position: "absolute",
+          // position: "absolute",
           backgroundColor: "#1D1F24",
           bottom: 0,
           left: 0,

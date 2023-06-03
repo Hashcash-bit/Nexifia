@@ -10,6 +10,7 @@ import {
   ScrollView,
   TextInput,
 } from "react-native";
+import { KeyboardAvoidingView } from "react-native";
 
 // The picker/date picker
 import { Picker } from "@react-native-picker/picker";
@@ -22,20 +23,21 @@ const ProfileScreen = () => {
   // The Gender Selector
   const [selectedGender, setSelectedGender] = useState("");
 
-  const handleGenderChange = (itemValue) => {
-    setSelectedGender(itemValue);
+  const handleGenderChange = (gender) => {
+    setSelectedGender(gender);
+    console.log("Your gender is: " + gender);
   };
 
   // The user
-  const [email, setEmail] = useState("");
-  useEffect(() => {
-    // Retrieve the user's email from Firebase
-    const user = firebase_auth.currentUser;
-    if (user) {
-      const emailParts = user.email.split("@");
-      setEmail(emailParts[0]);
-    }
-  }, []);
+  // const [email, setEmail] = useState("");
+  // useEffect(() => {
+  //   // Retrieve the user's email from Firebase
+  //   const user = firebase_auth.currentUser;
+  //   if (user) {
+  //     const emailParts = user.email.split("@");
+  //     setEmail(emailParts[0]);
+  //   }
+  // }, []);
 
   // The Date of Birth
   const [dateOfBirth, setDateOfBirth] = useState("");
@@ -79,153 +81,341 @@ const ProfileScreen = () => {
         flexDirection: "column",
       }}
     >
-      {/* This will be the Basic Details View */}
       <View
         style={{
-          display: "flex",
-          flexDirection: "column",
+          width: "100%",
+          height: 50,
+          backgroundColor: "#131417",
         }}
+      />
+      <ScrollView
+        contentContainerStyle={styles.container}
+        keyboardShouldPersistTaps="handled"
       >
         <Text
           style={{
-            marginTop: 50,
             marginLeft: 30,
             color: "#7d7e7f",
             fontSize: 20,
             fontWeight: "400",
+            paddingBottom: 10,
           }}
         >
           Basic Details
         </Text>
-        {/* The Full Name View */}
+        {/* This will be the Basic Details View */}
         <View
           style={{
-            marginTop: 11,
+            display: "flex",
+            flexDirection: "column",
           }}
         >
+          {/* The Full Name View */}
+          <View style={styles.subView}>
+            <Text style={styles.subHeader}>Full Name</Text>
+            <TextInput
+              // placeholder={email}
+              placeholder="test holder"
+              placeholderTextColor="#2f3033"
+              style={styles.singleInput}
+            />
+          </View>
+          {/* The Date of Birth View */}
+          <View
+            style={{
+              marginTop: 11,
+            }}
+          >
+            <Text style={styles.subHeader}>Date of Birth</Text>
+            <TextInput
+              placeholder="yyyy/mm/dd"
+              placeholderTextColor="#2f3033"
+              value={dateOfBirth}
+              onChangeText={handleDateOfBirthChange}
+              style={styles.singleInput}
+            />
+          </View>
+          {/* Gender/Sex View */}
+          <View
+            style={{
+              marginTop: 11,
+            }}
+          >
+            <Text style={styles.subHeader}>Gender/Sex</Text>
+            <View
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between",
+                marginTop: 4,
+                width: 300,
+                marginLeft: 30,
+              }}
+            >
+              <TouchableOpacity style={styles.genderButton} disabled={true}>
+                <TouchableOpacity
+                  style={[
+                    styles.unselectedButton,
+                    selectedGender === "Male" && styles.selectedButton,
+                  ]}
+                  onPress={() => handleGenderChange("Male")}
+                />
+                <Text
+                  style={{
+                    fontWeight: "300",
+                    color: "white",
+                  }}
+                >
+                  Male
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.genderButton} disabled={true}>
+                <TouchableOpacity
+                  style={[
+                    styles.unselectedButton,
+                    selectedGender === "Female" && styles.selectedButton,
+                  ]}
+                  onPress={() => handleGenderChange("Female")}
+                />
+                <Text
+                  style={{
+                    fontWeight: "300",
+                    color: "white",
+                  }}
+                >
+                  Female
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+          {/* This will be the contact details View */}
+          <View
+            style={{
+              marginTop: 11,
+            }}
+          >
+            <Text style={styles.subHeader}>Contact Detail</Text>
+            <TextInput
+              placeholder="Phone Number"
+              style={styles.singleInput}
+              placeholderTextColor="#2f3033"
+            />
+          </View>
+          {/* Address View */}
+          <View style={{ marginTop: 11 }}>
+            <Text style={styles.subHeader}>Address</Text>
+            <TextInput
+              placeholder="Street Address + Unit #"
+              style={styles.singleInput}
+              placeholderTextColor="#2f3033"
+            />
+            <TextInput
+              placeholder="City"
+              style={styles.singleInputAddress}
+              placeholderTextColor="#2f3033"
+            />
+            <View
+              style={{
+                marginLeft: 30,
+                marginTop: 8,
+                display: "flex",
+                flexDirection: "row",
+                width: 300,
+                justifyContent: "space-between",
+              }}
+            >
+              <TextInput
+                placeholder="Postal Code"
+                placeholderTextColor="#2f3033"
+                style={{
+                  padding: 10,
+                  borderWidth: 1,
+                  borderColor: "#7d7e7f",
+                  color: "white",
+                  borderRadius: 10,
+                  display: "flex",
+                  fontWeight: "300",
+                  width: 102,
+                  alignSelf: "center",
+                }}
+              />
+              <TextInput
+                placeholder="Country"
+                placeholderTextColor="#2f3033"
+                style={{
+                  padding: 10,
+                  borderWidth: 1,
+                  borderColor: "#7d7e7f",
+                  color: "white",
+                  borderRadius: 10,
+                  display: "flex",
+                  fontWeight: "300",
+                  width: 178,
+                  alignSelf: "center",
+                }}
+              />
+            </View>
+          </View>
+        </View>
+        {/* This will be the Personal Details View */}
+        <View style={{ marginTop: 11 }}>
           <Text
             style={{
               marginLeft: 30,
-              color: "#515254",
-              fontSize: 15,
+              color: "#7d7e7f",
+              fontSize: 20,
               fontWeight: "400",
+              paddingBottom: 10,
             }}
           >
-            Full Name
+            Personal Details
           </Text>
-          <TextInput
-            placeholder={email}
-            placeholderTextColor="#2f3033"
-            style={{
-              padding: 10,
-              borderWidth: 1,
-              borderColor: "#7d7e7f",
-              color: "white",
-              borderRadius: 10,
-              display: "flex",
-              fontWeight: "300",
-              width: 300,
-              alignSelf: "center",
-              marginTop: 4,
-            }}
-          />
-        </View>
-        {/* The Date of Birth View */}
-        <View
-          style={{
-            marginTop: 11,
-          }}
-        >
-          <Text
-            style={{
-              marginLeft: 30,
-              color: "#515254",
-              fontSize: 15,
-              fontWeight: "400",
-            }}
-          >
-            Date of Birth
-          </Text>
-          <TextInput
-            placeholder="yyyy/mm/dd"
-            placeholderTextColor="#2f3033"
-            value={dateOfBirth}
-            onChangeText={handleDateOfBirthChange}
-            style={{
-              padding: 10,
-              borderWidth: 1,
-              borderColor: "#7d7e7f",
-              color: "white",
-              borderRadius: 10,
-              display: "flex",
-              fontWeight: "300",
-              width: 300,
-              alignSelf: "center",
-              marginTop: 4,
-            }}
-          />
-        </View>
-        {/* Gender/Sex View */}
-        <View
-          style={{
-            marginTop: 11,
-          }}
-        >
-          <Text
-            style={{
-              marginLeft: 30,
-              color: "#515254",
-              fontSize: 15,
-              fontWeight: "400",
-            }}
-          >
-            Gender/Sex
-          </Text>
-          <View>
-            <TouchableOpacity>
-              <Text>Male</Text>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <Text>Female</Text>
-            </TouchableOpacity>
+          {/* This is the SIN Number View */}
+          <View style={styles.subView}>
+            <Text style={styles.subHeader}>Social Insurance Number (SIN)</Text>
+            <TextInput
+              placeholder="Type in your SIN"
+              style={styles.singleInput}
+              placeholderTextColor="#2f3033"
+            />
+          </View>
+          {/* Ontario Health card View */}
+          <View style={{ marginTop: 11 }}>
+            <Text style={styles.subHeader}>
+              Ontario Health Insurance Plan (OHIP)
+            </Text>
+            <View
+              style={{
+                marginLeft: 30,
+                marginTop: 8,
+                display: "flex",
+                flexDirection: "row",
+                width: 300,
+                justifyContent: "space-between",
+              }}
+            >
+              <TextInput
+                placeholder="OHIP Number"
+                placeholderTextColor="#2f3033"
+                style={{
+                  padding: 10,
+                  borderWidth: 1,
+                  borderColor: "#7d7e7f",
+                  color: "white",
+                  borderRadius: 10,
+                  display: "flex",
+                  fontWeight: "300",
+                  width: 102,
+                  alignSelf: "center",
+                }}
+              />
+              <TextInput
+                placeholder="VI"
+                placeholderTextColor="#2f3033"
+                style={{
+                  padding: 10,
+                  borderWidth: 1,
+                  borderColor: "#7d7e7f",
+                  color: "white",
+                  borderRadius: 10,
+                  display: "flex",
+                  fontWeight: "300",
+                  width: 178,
+                  alignSelf: "center",
+                }}
+              />
+            </View>
           </View>
         </View>
-        {/* This will be the contact details View */}
         <View>
-          <Text>Contact Detail</Text>
-          <TextInput placeholder="Phone Number" />
+          <TouchableOpacity>
+            <Text>Submit</Text>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Text>Reset</Text>
+          </TouchableOpacity>
         </View>
-        {/* Address View */}
         <View>
-          <Text>Address</Text>
-          <TextInput placeholder="Street Address" />
-          <TextInput placeholder="City" />
-          <View>
-            <TextInput placeholder="Apt" />
-            <TextInput placeholder="Country" />
-          </View>
+          <TouchableOpacity>
+            <Text>Logout</Text>
+          </TouchableOpacity>
         </View>
-      </View>
-      {/* This will be the Personal Details View */}
-      <View>
-        <Text>Personal Details</Text>
-        {/* This is the SIN Number View */}
-        <View>
-          <Text>Social Insurance Number (SIN)</Text>
-          <TextInput placeholder="Type in your SIN" />
-        </View>
-        {/* Ontario Health card View */}
-        <View>
-          <Text>Ontario Health Insurance Plan (OHIP)</Text>
-          <View>
-            <TextInput placeholder="OHIP Number" />
-            <TextInput placeholder="VI" />
-          </View>
-        </View>
-      </View>
+      </ScrollView>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flexGrow: 1,
+    backgroundColor: "#131417",
+    flexDirection: "column",
+    paddingBottom: 20,
+  },
+  genderButton: {
+    padding: 10,
+    borderWidth: 1,
+    borderColor: "#7d7e7f",
+    borderRadius: 10,
+    display: "flex",
+    flexDirection: "row",
+    width: 140,
+    verticalAlign: "middle",
+  },
+  unselectedButton: {
+    borderWidth: 1,
+    // padding: 10,
+    width: 20,
+    height: 20,
+    borderColor: "white",
+    borderRadius: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    marginRight: 12,
+    alignSelf: "center",
+  },
+  selectedButton: {
+    backgroundColor: "#0708c1",
+    borderWidth: 2,
+  },
+  //Lets make the styling easier
+  //The styling for the View encasing the headers and text fields
+  subView: {
+    marginTop: 1,
+  },
+  //Subheader styles (Full Name, DOB, Gender/Sex.....)
+  subHeader: {
+    marginLeft: 30,
+    color: "#515254",
+    fontSize: 15,
+    fontWeight: "400",
+  },
+  // Single text input fields styles
+  singleInput: {
+    padding: 10,
+    borderWidth: 1,
+    borderColor: "#7d7e7f",
+    color: "white",
+    borderRadius: 10,
+    display: "flex",
+    fontWeight: "300",
+    width: 300,
+    alignSelf: "center",
+    marginTop: 4,
+  },
+  singleInputAddress: {
+    padding: 10,
+    borderWidth: 1,
+    borderColor: "#7d7e7f",
+    color: "white",
+    borderRadius: 10,
+    display: "flex",
+    fontWeight: "300",
+    width: 300,
+    alignSelf: "center",
+    marginTop: 8,
+  },
+});
 
 export default ProfileScreen;
 
