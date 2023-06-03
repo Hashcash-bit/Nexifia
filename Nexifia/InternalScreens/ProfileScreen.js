@@ -18,8 +18,12 @@ import DatePicker from "react-native-datepicker";
 
 // Import firbase
 import { firebase_auth } from "../firebase";
+import { signOut } from "firebase/auth";
 
-const ProfileScreen = () => {
+// Confirm logout screen
+import LogoutConfirmationScreen from "./ConfirmLogout/LogoutConfirmationScreen";
+
+const ProfileScreen = ({ navigation }) => {
   // The Gender Selector
   const [selectedGender, setSelectedGender] = useState("");
 
@@ -29,15 +33,15 @@ const ProfileScreen = () => {
   };
 
   // The user
-  // const [email, setEmail] = useState("");
-  // useEffect(() => {
-  //   // Retrieve the user's email from Firebase
-  //   const user = firebase_auth.currentUser;
-  //   if (user) {
-  //     const emailParts = user.email.split("@");
-  //     setEmail(emailParts[0]);
-  //   }
-  // }, []);
+  const [email, setEmail] = useState("");
+  useEffect(() => {
+    // Retrieve the user's email from Firebase
+    const user = firebase_auth.currentUser;
+    if (user) {
+      const emailParts = user.email.split("@");
+      setEmail(emailParts[0]);
+    }
+  }, []);
 
   // The Date of Birth
   const [dateOfBirth, setDateOfBirth] = useState("");
@@ -72,6 +76,39 @@ const ProfileScreen = () => {
     setDateOfBirth(formattedText);
   };
 
+  // The logout popup functionality
+  const [showConfirmation, setShowConfirmation] = useState(false);
+  // This is to diable the buttons when the popup happens
+  const [disableButtons, setDisableButtons] = useState(false);
+  const [blurryScreen, setBlurryScreen] = useState(false);
+
+  // The Updated Confirm Screen will go here
+  const handleLogout1 = () => {
+    setShowConfirmation(true);
+    setDisableButtons(true);
+    setBlurryScreen(true);
+  };
+
+  const handleLogoutConfirmed = async () => {
+    //try and catch logout
+    try {
+      // signout function goes here
+      await signOut(firebase_auth);
+      // Where the user should go after loging out
+      console.log("Logout Successful");
+      Toast.success("You have been logged out");
+      navigation.navigate("OnBoarding");
+    } catch (error) {
+      console.log("Error logging out", error);
+    }
+  };
+
+  const handleLogoutCancelled = () => {
+    setShowConfirmation(false);
+    setDisableButtons(false);
+    setBlurryScreen(false);
+  };
+
   return (
     <View
       style={{
@@ -94,6 +131,7 @@ const ProfileScreen = () => {
       <ScrollView
         contentContainerStyle={styles.container}
         keyboardShouldPersistTaps="handled"
+        showsVerticalScrollIndicator={false}
       >
         <Text
           style={{
@@ -119,8 +157,8 @@ const ProfileScreen = () => {
           <View style={styles.subView}>
             <Text style={styles.subHeader}>Full Name</Text>
             <TextInput
-              // placeholder={email}
-              placeholder="test holder"
+              placeholder={email}
+              // placeholder="test holder"
               placeholderTextColor="#2f3033"
               style={styles.singleInput}
             />
@@ -414,7 +452,6 @@ const ProfileScreen = () => {
             borderTopWidth: StyleSheet.hairlineWidth,
             width: 300,
             marginTop: 11,
-            // marginLeft: 30,
             justifyContent: "center",
             textAlign: "center",
             alignContent: "center",
@@ -439,9 +476,12 @@ const ProfileScreen = () => {
             alignItems: "center",
             marginTop: 11,
             alignSelf: "center",
+            paddingBottom: 20,
           }}
         >
           <TouchableOpacity
+            onPress={handleLogout1}
+            disabled={disableButtons}
             style={{
               backgroundColor: "#6C63FF",
               paddingBottom: 12,
@@ -464,8 +504,35 @@ const ProfileScreen = () => {
               Logout
             </Text>
           </TouchableOpacity>
+          <Text
+            style={{
+              fontSize: 12,
+              alignSelf: "center",
+              color: "#666768",
+              marginTop: 11,
+            }}
+            onPress={() => navigation.navigate("OnBoarding")}
+          >
+            Press to see the{" "}
+            <Text style={{ fontWeight: "bold" }}>Landing Page</Text> again?
+          </Text>
         </View>
       </ScrollView>
+      {showConfirmation && (
+        <LogoutConfirmationScreen
+          onLogout={handleLogoutConfirmed}
+          onCancel={handleLogoutCancelled}
+        />
+      )}
+      {disableButtons && (
+        <View
+          style={{
+            ...StyleSheet.absoluteFillObject,
+            backgroundColor: "rgba(0, 0, 0, 0.6)",
+          }}
+          pointerEvents="auto"
+        />
+      )}
     </View>
   );
 };
