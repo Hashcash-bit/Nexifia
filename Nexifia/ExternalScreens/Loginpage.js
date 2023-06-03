@@ -214,7 +214,6 @@ const Loginpage = ({ navigation }) => {
           // onPress={() => navigation.navigate("InternalStack")} // This is before the logic was implemented
           onPress={() => handleLogin()} // This is when firebase auth is implemented
           style={{
-            // padding: 20,
             paddingBottom: 12,
             paddingTop: 12,
             backgroundColor: "#6C63FF",

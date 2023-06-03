@@ -335,16 +335,56 @@ const ProfileScreen = () => {
           style={{
             display: "flex",
             marginLeft: 30,
-            marginTop: 11,
+            marginTop: 21,
             width: 300,
             flexDirection: "row",
+            justifyContent: "space-between",
           }}
         >
-          <TouchableOpacity>
-            <Text>Submit</Text>
+          <TouchableOpacity
+            style={{
+              paddingBottom: 12,
+              paddingTop: 12,
+              backgroundColor: "#6C63FF",
+              borderRadius: 15,
+              width: 140,
+              alignContent: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Text
+              style={{
+                color: "white",
+                fontWeight: "bold",
+                alignContent: "center",
+                justifyContent: "center",
+                alignSelf: "center",
+              }}
+            >
+              Submit
+            </Text>
           </TouchableOpacity>
-          <TouchableOpacity>
-            <Text>Reset</Text>
+          <TouchableOpacity
+            style={{
+              padding: 12,
+              backgroundColor: "#6C63FF",
+              borderRadius: 15,
+              width: 140,
+              alignContent: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Text
+              style={{
+                color: "white",
+                fontWeight: "bold",
+                alignContent: "center",
+                justifyContent: "center",
+                alignSelf: "center",
+              }}
+            >
+              Reset
+            </Text>
           </TouchableOpacity>
         </View>
         <View>
