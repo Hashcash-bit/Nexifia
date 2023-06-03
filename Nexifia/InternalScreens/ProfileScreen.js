@@ -237,6 +237,7 @@ const ProfileScreen = () => {
                   fontWeight: "300",
                   width: 102,
                   alignSelf: "center",
+                  textAlign: "center",
                 }}
               />
               <TextInput
@@ -309,7 +310,7 @@ const ProfileScreen = () => {
                   borderRadius: 10,
                   display: "flex",
                   fontWeight: "300",
-                  width: 102,
+                  width: 230,
                   alignSelf: "center",
                 }}
               />
@@ -324,8 +325,11 @@ const ProfileScreen = () => {
                   borderRadius: 10,
                   display: "flex",
                   fontWeight: "300",
-                  width: 178,
+                  width: 50,
                   alignSelf: "center",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  textAlign: "center",
                 }}
               />
             </View>
@@ -367,7 +371,41 @@ const ProfileScreen = () => {
           <TouchableOpacity
             style={{
               padding: 12,
-              backgroundColor: "#6C63FF",
+              backgroundColor: "#818385",
+              borderRadius: 15,
+              width: 140,
+              alignContent: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Text
+              style={{
+                color: "#131417",
+                fontWeight: "bold",
+                alignContent: "center",
+                justifyContent: "center",
+                alignSelf: "center",
+              }}
+            >
+              Reset
+            </Text>
+          </TouchableOpacity>
+        </View>
+        <View
+          style={{
+            width: 300,
+            justifyContent: "center",
+            alignContent: "center",
+            alignItems: "center",
+            marginLeft: 30,
+            marginTop: 21,
+          }}
+        >
+          <TouchableOpacity
+            style={{
+              paddingBottom: 12,
+              paddingTop: 12,
+              backgroundColor: "#0708c1",
               borderRadius: 15,
               width: 140,
               alignContent: "center",
@@ -383,13 +421,8 @@ const ProfileScreen = () => {
                 alignSelf: "center",
               }}
             >
-              Reset
+              Logout
             </Text>
-          </TouchableOpacity>
-        </View>
-        <View>
-          <TouchableOpacity>
-            <Text>Logout</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
