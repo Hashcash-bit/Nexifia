@@ -108,6 +108,8 @@ const ProfileScreen = () => {
           style={{
             display: "flex",
             flexDirection: "column",
+            width: 300,
+            marginLeft: 30,
           }}
         >
           {/* The Full Name View */}
@@ -148,8 +150,7 @@ const ProfileScreen = () => {
                 flexDirection: "row",
                 justifyContent: "space-between",
                 marginTop: 4,
-                width: 300,
-                marginLeft: 30,
+                width: "100%",
               }}
             >
               <TouchableOpacity style={styles.genderButton} disabled={true}>
@@ -216,11 +217,10 @@ const ProfileScreen = () => {
             />
             <View
               style={{
-                marginLeft: 30,
                 marginTop: 8,
                 display: "flex",
                 flexDirection: "row",
-                width: 300,
+                width: "100%",
                 justifyContent: "space-between",
               }}
             >
@@ -258,10 +258,15 @@ const ProfileScreen = () => {
           </View>
         </View>
         {/* This will be the Personal Details View */}
-        <View style={{ marginTop: 11 }}>
+        <View
+          style={{
+            marginTop: 11,
+            width: 300,
+            marginLeft: 30,
+          }}
+        >
           <Text
             style={{
-              marginLeft: 30,
               color: "#7d7e7f",
               fontSize: 20,
               fontWeight: "400",
@@ -286,11 +291,10 @@ const ProfileScreen = () => {
             </Text>
             <View
               style={{
-                marginLeft: 30,
                 marginTop: 8,
                 display: "flex",
                 flexDirection: "row",
-                width: 300,
+                width: "100%",
                 justifyContent: "space-between",
               }}
             >
@@ -327,7 +331,15 @@ const ProfileScreen = () => {
             </View>
           </View>
         </View>
-        <View>
+        <View
+          style={{
+            display: "flex",
+            marginLeft: 30,
+            marginTop: 11,
+            width: 300,
+            flexDirection: "row",
+          }}
+        >
           <TouchableOpacity>
             <Text>Submit</Text>
           </TouchableOpacity>
@@ -364,7 +376,6 @@ const styles = StyleSheet.create({
   },
   unselectedButton: {
     borderWidth: 1,
-    // padding: 10,
     width: 20,
     height: 20,
     borderColor: "white",
@@ -385,7 +396,6 @@ const styles = StyleSheet.create({
   },
   //Subheader styles (Full Name, DOB, Gender/Sex.....)
   subHeader: {
-    marginLeft: 30,
     color: "#515254",
     fontSize: 15,
     fontWeight: "400",
@@ -402,6 +412,7 @@ const styles = StyleSheet.create({
     width: 300,
     alignSelf: "center",
     marginTop: 4,
+    // marginLeft: 30,
   },
   singleInputAddress: {
     padding: 10,
