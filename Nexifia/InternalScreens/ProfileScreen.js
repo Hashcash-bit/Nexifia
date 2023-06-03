@@ -278,7 +278,10 @@ const ProfileScreen = () => {
           </Text>
           {/* This is the SIN Number View */}
           <View style={styles.subView}>
-            <Text style={styles.subHeader}>Social Insurance Number (SIN)</Text>
+            <Text style={styles.subHeader}>
+              Social Insurance Number{" "}
+              <Text style={{ fontWeight: "bold" }}>(SIN)</Text>
+            </Text>
             <TextInput
               placeholder="Type in your SIN"
               style={styles.singleInput}
@@ -288,7 +291,8 @@ const ProfileScreen = () => {
           {/* Ontario Health card View */}
           <View style={{ marginTop: 11 }}>
             <Text style={styles.subHeader}>
-              Ontario Health Insurance Plan (OHIP)
+              Ontario Health Insurance Plan{" "}
+              <Text style={{ fontWeight: "bold" }}>(OHIP)</Text>
             </Text>
             <View
               style={{
@@ -371,16 +375,17 @@ const ProfileScreen = () => {
           <TouchableOpacity
             style={{
               padding: 12,
-              backgroundColor: "#818385",
               borderRadius: 15,
               width: 140,
               alignContent: "center",
               justifyContent: "center",
+              borderColor: "#818385",
+              borderWidth: 1,
             }}
           >
             <Text
               style={{
-                color: "#131417",
+                color: "#818385",
                 fontWeight: "bold",
                 alignContent: "center",
                 justifyContent: "center",
