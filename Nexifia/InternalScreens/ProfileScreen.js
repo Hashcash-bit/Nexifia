@@ -79,6 +79,9 @@ const ProfileScreen = () => {
         backgroundColor: "#131417",
         display: "flex",
         flexDirection: "column",
+        justifyContent: "center",
+        alignContent: "center",
+        alignItems: "center",
       }}
     >
       <View
@@ -94,7 +97,7 @@ const ProfileScreen = () => {
       >
         <Text
           style={{
-            marginLeft: 30,
+            // marginLeft: 30,
             color: "#7d7e7f",
             fontSize: 20,
             fontWeight: "400",
@@ -109,7 +112,7 @@ const ProfileScreen = () => {
             display: "flex",
             flexDirection: "column",
             width: 300,
-            marginLeft: 30,
+            // marginLeft: 30,
           }}
         >
           {/* The Full Name View */}
@@ -259,23 +262,25 @@ const ProfileScreen = () => {
           </View>
         </View>
         {/* This will be the Personal Details View */}
-        <View
+        <Text
           style={{
+            color: "#7d7e7f",
+            fontSize: 20,
+            fontWeight: "400",
             marginTop: 11,
-            width: 300,
-            marginLeft: 30,
           }}
         >
-          <Text
-            style={{
-              color: "#7d7e7f",
-              fontSize: 20,
-              fontWeight: "400",
-              paddingBottom: 10,
-            }}
-          >
-            Personal Details
-          </Text>
+          Personal Details
+        </Text>
+        <View
+          style={{
+            marginTop: 10,
+            width: 300,
+            justifyContent: "center",
+            alignContent: "center",
+            alignItems: "center",
+          }}
+        >
           {/* This is the SIN Number View */}
           <View style={styles.subView}>
             <Text style={styles.subHeader}>
@@ -289,8 +294,16 @@ const ProfileScreen = () => {
             />
           </View>
           {/* Ontario Health card View */}
-          <View style={{ marginTop: 11 }}>
-            <Text style={styles.subHeader}>
+          <View style={styles.subView}>
+            <Text
+              style={{
+                color: "#515254",
+                fontSize: 15,
+                fontWeight: "400",
+                marginTop: 11,
+                alignSelf: "flex-start",
+              }}
+            >
               Ontario Health Insurance Plan{" "}
               <Text style={{ fontWeight: "bold" }}>(OHIP)</Text>
             </Text>
@@ -301,6 +314,8 @@ const ProfileScreen = () => {
                 flexDirection: "row",
                 width: "100%",
                 justifyContent: "space-between",
+                alignContent: "center",
+                alignItems: "center",
               }}
             >
               <TextInput
@@ -315,7 +330,6 @@ const ProfileScreen = () => {
                   display: "flex",
                   fontWeight: "300",
                   width: 230,
-                  alignSelf: "center",
                 }}
               />
               <TextInput
@@ -330,10 +344,8 @@ const ProfileScreen = () => {
                   display: "flex",
                   fontWeight: "300",
                   width: 50,
-                  alignSelf: "center",
-                  alignItems: "center",
-                  justifyContent: "center",
                   textAlign: "center",
+                  marginLeft: 20,
                 }}
               />
             </View>
@@ -342,7 +354,7 @@ const ProfileScreen = () => {
         <View
           style={{
             display: "flex",
-            marginLeft: 30,
+            // marginLeft: 30,
             marginTop: 21,
             width: 300,
             flexDirection: "row",
@@ -402,7 +414,7 @@ const ProfileScreen = () => {
             borderTopWidth: StyleSheet.hairlineWidth,
             width: 300,
             marginTop: 11,
-            marginLeft: 30,
+            // marginLeft: 30,
             justifyContent: "center",
             textAlign: "center",
             alignContent: "center",
